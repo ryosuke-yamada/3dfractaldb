@@ -1,6 +1,6 @@
 # Multi-View Fractal DataBase (MV-FractalDB) 
 
-Run the python script ```render.sh```, you can get 3D fractal models and multi-view fractal images.
+<!-- Run the python script ```render.sh```, you can get 3D fractal models and multi-view fractal images. -->
 
 <!-- ## Prerequisites
 - Anaconda
