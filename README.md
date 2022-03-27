@@ -67,4 +67,4 @@ If you use this code, please cite the following paper:
 ```
 
 ## Terms of use
-The authors affiliated in National Institute of Advanced Industrial Science and Technology (AIST) and Tokyo Denki University (TDU) are not responsible for the reproduction, duplication, copy, sale, trade, resell or exploitation for any commercial purposes, of any portion of the datas and any portion of derived the data. In no event will we be also liable for any other damages resulting from this data or any derived data.
+The authors affiliated in National Institute of Advanced Industrial Science and Technology (AIST), Tokyo Denki University (TDU), Waseda University and Keio University are not responsible for the reproduction, duplication, copy, sale, trade, resell or exploitation for any commercial purposes, of any portion of the datas and any portion of derived the data. In no event will we be also liable for any other damages resulting from this data or any derived data.
