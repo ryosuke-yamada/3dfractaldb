@@ -28,28 +28,19 @@ International Conference on Computer Vision and Pattern Recognition (CVPR) 2022 
 $ conda create -n mvfdb python=3.9 -y
 $ conda activate mvfdb
 ```
-
 2. Install requirement modules
 ```
 $ conda install -c conda-forge openexr-python
 $ pip install -r requirements.txt
 ``` -->
 
-## MV-FractalDB Construction ([README]())
-1. Search fractal category and create 3D fractal models, instance augmentation by IFS weights.
+## MV-FractalDB Construction ([README](https://github.com/ryosuke-yamada/3dfractaldb/blob/main/mvfractaldb/README.md))
 ```
-$ cd mvfractaldb/3dfractal_render
-$ bash 3dmodels_render.sh
-```
-
-2. Render multi-view images
-```
-$ cd multi-view_image_render
-$ python image_render.py
+$ cd mvfractaldb/
+$ bash MVFractalDB_render.sh
 ```
 
 ## PC-FractalDB Construction ([README](https://github.com/ryosuke-yamada/3dfractaldb/blob/main/pcfractaldb/README.md))
-1. Search fractal category and create 3D fractal models.
 ```
 $ cd pcfractaldb
 $ bash PCFractalDB_render.sh

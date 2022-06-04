@@ -49,7 +49,7 @@ The folder structure is constructed as follows.
   render.sh
 ```
 
-## Training / validation in 3D object detection
+## Pre-train / Fine-tune in 3D object detection
  We employed spatiotemporal Convolutional Neural Networks. We mainly used ```PointContrast``` and ```VoteNet``` for main experiments and ```ContrastiveSceneContexts``` for additional experiments.
 
 * [PointContrast](https://github.com/facebookresearch/PointContrast)
