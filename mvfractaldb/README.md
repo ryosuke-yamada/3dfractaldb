@@ -1,4 +1,4 @@
-# Multi-vuew Fractal DataBase (MV-FractalDB) 
+# Multi-view Fractal DataBase (MV-FractalDB) 
 
 ## Abstruct
 
