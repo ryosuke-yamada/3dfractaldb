@@ -1,7 +1,6 @@
 # 3D Fractal DataBase (3D-FractalDB) 
 
 ## Summary
-
 The repository contains a 3D Fractal Category Search, Multi-View Fractal DataBase (MV-FractalDB) and Point Cloud Fractal DataBase (PC-FractalDB) Construction in Python3.
 
 The repository is based on the paper:<br>
@@ -23,7 +22,7 @@ International Conference on Computer Vision and Pattern Recognition (CVPR) 2022 
 - Anaconda
 - Python 3.9+ -->
 
-## Installation
+<!-- ## Installation
 1. Create conda virtual environment.
 ```
 $ conda create -n mvfdb python=3.9 -y
@@ -34,23 +33,27 @@ $ conda activate mvfdb
 ```
 $ conda install -c conda-forge openexr-python
 $ pip install -r requirements.txt
+``` -->
+
+## MV-FractalDB Construction ([README]())
+1. Search fractal category and create 3D fractal models, instance augmentation by IFS weights.
+```
+$ cd mvfractaldb/3dfractal_render
+$ bash 3dmodels_render.sh
 ```
 
-## MV-FractalDB Construction
-1. Search fractal category and create a 3D fractal model
+2. Render multi-view images
 ```
-$ cd 3dfractal_render
-$ bash render.sh
-```
-
-2. Render multi-view image
-```
-$ cd image_render
-$ python render.py
+$ cd multi-view_image_render
+$ python image_render.py
 ```
 
-## PC-FractalDB Construction
-Coming Soon...
+## PC-FractalDB Construction ([README](https://github.com/ryosuke-yamada/3dfractaldb/blob/main/pcfractaldb/README.md))
+1. Search fractal category and create 3D fractal models.
+```
+$ cd pcfractaldb
+$ bash PCFractalDB_render.sh
+```
 
 ## Citation
 
