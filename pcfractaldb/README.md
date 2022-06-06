@@ -1,4 +1,4 @@
-# Point Cloud Fractal DataBase (PC-FractalDB) CVPR2022
+# Point Cloud Fractal DataBase (PC-FractalDB) CVPR 2022
 
 ## Abstruct
 The construction of 3D point cloud datasets requires a great deal of human effort. Therefore, constructing a large-scale 3D point clouds dataset is difficult. 
