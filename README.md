@@ -59,6 +59,16 @@ If you use this code, please cite the following paper:
   organization={IEEE}
 }
 ```
+```bibtex
+@InProceedings{Yamada_2022_CVPR,
+    author    = {Yamada, Ryosuke and Kataoka, Hirokatsu and Chiba, Naoya and Domae, Yukiyasu and Ogata, Tetsuya},
+    title     = {Point Cloud Pre-Training With Natural 3D Structures},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2022},
+    pages     = {21283-21293}
+}
+```
 
 ## Terms of use
 The authors affiliated in National Institute of Advanced Industrial Science and Technology (AIST), Tokyo Denki University (TDU), Waseda University and Keio University are not responsible for the reproduction, duplication, copy, sale, trade, resell or exploitation for any commercial purposes, of any portion of the datas and any portion of derived the data. In no event will we be also liable for any other damages resulting from this data or any derived data.
