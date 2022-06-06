@@ -14,7 +14,7 @@ Ryosuke Yamada, Hirokatsu Kataoka, Naoya Chiba, Yukiyasu Domae and Tetsuya Ogata
 "Point Cloud Pre-training with Natural 3D Structure"<br>
 International Conference on Computer Vision and Pattern Recognition (CVPR) 2022 <br>
 [[Project](https://ryosuke-yamada.github.io/PointCloud-FractalDataBase/)] 
-[[PDF]()]<br>
+[[PDF](https://openaccess.thecvf.com/content/CVPR2022/papers/Yamada_Point_Cloud_Pre-Training_With_Natural_3D_Structures_CVPR_2022_paper.pdf)]<br>
 
 <!-- Run the python script ```render.sh```, you can get 3D fractal models and multi-view fractal images. -->
 
