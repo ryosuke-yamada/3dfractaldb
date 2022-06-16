@@ -12,4 +12,4 @@ python 3dfractal_render/category_search.py --variance=${variance_threshold} --nu
 python 3dfractal_render/instance.py --load_root ${param_path} --save_root ${model_save_path} --classes ${numof_category}
 
 # Render Multi-view images
-python image_render/render.py --load_root ${model_save_path} --save_root ${image_save_path}
+python image_render/render.py --load_root ${model_save_path} --save_path ${image_save_path}
