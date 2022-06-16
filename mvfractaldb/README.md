@@ -9,8 +9,8 @@ Multi-view image recognition is one of the solutions in order to avoid leaving w
 ## Installation
 1. Create anaconda virtual environment.
 ```
-$ conda create -n fdb python=3.x -y
-$ conda activate fdb
+$ conda create -n exfdb python=3.x -y
+$ conda activate exfdb
 ```
 
 2. Install requirement modules
@@ -34,7 +34,7 @@ The folder structure is constructed as follows.
 ./
   MVFractalDB/
     3DIFS_param/
-        MVFractalDB-{category}/
+        ExFractalDB-{category}/
             000000.csv
             000001.csv
             ...
@@ -53,8 +53,3 @@ The folder structure is constructed as follows.
            ...
          ...
 ```
-
-## Pre-train / Fine-tune in multi-view image recognition
- We mainly used ```RotationNet``` for main experiments.
-
-* [RotationNet](https://kanezaki.github.io/rotationnet/)

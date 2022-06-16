@@ -4,6 +4,8 @@
 # export PYSDL2_DLL_PATH="/path/to/SDL2/bin"
 # export PATH="/path/to/SDL2/bin:$PATH"
 
+import argparse
+
 from sdl2 import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -22,13 +24,6 @@ import cv2
 import glob 
 import random
 from PIL import Image
-
-def conf():
-	parser = argparse.ArgumentParser()
-	parser.add_argument("--load_root", default='./../3dfractal_render/3Dfractal/cat1000_ins145', type = str, help="load PLY root")
-	parser.add_argument("--save_root", default="./EXFractalDB", type = str, help="save .png root")
-	args = parser.parse_args()
-	return args
 
 def myGLDebugCallback(source, mtype, id, severity, length, message, userParam):
     print("[GLDBG]")
@@ -55,7 +50,7 @@ class TextDrawer:
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
         glBindTexture(GL_TEXTURE_2D, 0)
         self.sfc = SDL_CreateRGBSurface(0, self.Width, self.Height, 32, 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff)
-        self.font = sdl2.ext.FontManager("./arial.ttf", size=16, color=sdl2.ext.Color(255, 255, 255, 255), bg_color=sdl2.ext.Color(0, 0, 0, 0))
+        self.font = sdl2.ext.FontManager("./image_render/arial.ttf", size=16, color=sdl2.ext.Color(255, 255, 255, 255), bg_color=sdl2.ext.Color(0, 0, 0, 0))
 
         points=np.array([
             -1,-1,-1,
@@ -89,7 +84,7 @@ class TextDrawer:
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4*len(indices), indices, GL_STATIC_DRAW)
         glBindVertexArray(0)
 
-        self.printTexShader_prog = createShader("printTexShader.vert","printTexShader.frag")
+        self.printTexShader_prog = createShader("./image_render/printTexShader.vert","./image_render/printTexShader.frag")
         self.colorSampler_ul = glGetUniformLocation(self.printTexShader_prog, "colorSampler")
         glUseProgram(self.printTexShader_prog)
         glUniform1i(self.colorSampler_ul, 0)
@@ -155,6 +150,10 @@ def createShader(vertFile, fragFile):
 
     return shader_prog
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--load_root", default='./3dfractal_render/ifs_weight/weights_ins145.csv', type = str, help="load PLY root")
+parser.add_argument("--save_root", default="./dataset/EXFractalDB", type = str, help="save .png root")
+args = parser.parse_args()
 
 Width = 512
 Height = 512
@@ -186,7 +185,7 @@ gl_version= gl_major_version+gl_minor_version/10
 renderer = SDL_CreateRenderer(window,-1, SDL_RENDERER_ACCELERATED)
 textDrawer = TextDrawer(renderer)
 
-unlitShader_prog = createShader("unlit_shader.vert","unlit_shader.frag")
+unlitShader_prog = createShader("./image_render/unlit_shader.vert","./image_render/unlit_shader.frag")
 
 fbo = glGenFramebuffers(1)
 rbos = glGenRenderbuffers(2)
@@ -226,18 +225,18 @@ glEnableVertexAttribArray(1)
 glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 4*6, ctypes.c_void_p(4*3))
 glBindVertexArray(0)
 
-if not os.path.exists(args.save_path):
-    os.makedirs(args.save_path)
+if not os.path.exists(args.save_root):
+    os.makedirs(args.save_root)
 
 cat_list = sorted(os.listdir(args.load_root))
 for cat_ in cat_list:
     cat_path = os.path.join(args.load_root, cat_)
     ply_list = sorted(glob.glob(cat_path+"/*.ply"))
 
-    if not os.path.exists(args.save_path + "/" + cat_):
-        os.makedirs(args.save_path + "/" + cat_)
-    # if not os.path.exists(save_path + "/depth/" + cat_):
-    #     os.makedirs(save_path + "/depth/" + cat_)
+    if not os.path.exists(args.save_root + "/" + cat_):
+        os.makedirs(args.save_root + "/" + cat_)
+    # if not os.path.exists(save_root + "/depth/" + cat_):
+    #     os.makedirs(save_root + "/depth/" + cat_)
 
     for i, ply in enumerate(ply_list):
         with open(ply, 'rb') as f:
@@ -385,7 +384,7 @@ for cat_ in cat_list:
                 print(ret_color.dtype)
                 glUnmapBuffer(GL_PIXEL_PACK_BUFFER)
                 img_color = Image.fromarray(ret_color)
-                img_color.save(args.save_path + "/" + cat_ +"/"+ cat_ +"_{:05d}_{:03d}.png".format(i, fCount))
+                img_color.save(args.save_root + "/" + cat_ +"/"+ cat_ +"_{:05d}_{:03d}.png".format(i, fCount))
 
                 tcc = time.time()
                 print("duration: %.1f"%(tcc-tbc))
