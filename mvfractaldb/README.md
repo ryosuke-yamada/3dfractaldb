@@ -9,8 +9,8 @@ Multi-view image recognition is one of the solutions in order to avoid leaving w
 ## Installation
 1. Create anaconda virtual environment.
 ```
-$ conda create -n exfdb python=3.x -y
-$ conda activate exfdb
+$ conda create -n mvfdb python=3.x -y
+$ conda activate mvfdb
 ```
 
 2. Install requirement modules
