@@ -9,7 +9,7 @@ image_save_path='./../MVFractalDB/images/MVFractalDB-'${numof_category}
 python 3dfractal_render/category_search.py --variance=${variance_threshold} --numof_classes=${numof_category} --save_root=${param_path}
 
 # Generate 3D fractal model
-python 3dfractal_render/instance.py --load_root ${param_path} --save_root ${3dmodel_save_path} --classes ${numof_category}
+python 3dfractal_render/instance.py --load_root ${param_path} --save_root ${model_save_path} --classes ${numof_category}
 
 # Render Multi-view images
 python image_render/render.py --load_root ${model_save_path} --save_root ${image_save_path}
