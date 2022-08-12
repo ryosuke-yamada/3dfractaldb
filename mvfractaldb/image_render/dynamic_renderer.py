@@ -1,4 +1,4 @@
-# depends: pegl, glm, PyOpenGL, plyfile, OpenEXR, PIL, matplotlib
+# depends: pegl, PyGLM (not glm), PyOpenGL, plyfile, OpenEXR, PIL, matplotlib
 
 import argparse
 
@@ -79,7 +79,7 @@ class DynamicRenderer(torch.utils.data.Dataset):
         self.transform = transform
         self.width=480
         self.height=480
-        self.npts=10000
+        self.npts=4000
 
         print("Constructing ply file list from %s..."%data_dir)
         self.cat_list = sorted(os.listdir(data_dir))
@@ -105,7 +105,7 @@ class DynamicRenderer(torch.utils.data.Dataset):
         self.ptss=Parallel(n_jobs=-1,verbose=10)(delayed(load_ply)(cat_ply) for cat_ply in self.ply_lists)
         # for cat_id, ply in self.ply_lists: 
         #     pts=load_ply(ply)
-        #     self.ptss.append([cat_id, pts])
+        #     self.ptss.append((cat_id, pts))
         print("Done.")
         
     def open(self, gpu_id:int):
@@ -177,6 +177,25 @@ class DynamicRenderer(torch.utils.data.Dataset):
             os.path.join(os.path.dirname(os.path.abspath(__file__)),"unlit_shader.vert"),
             os.path.join(os.path.dirname(os.path.abspath(__file__)),"unlit_shader.frag"))
 
+        mat_proj_ul = glGetUniformLocation(self.shader,"mat_proj")
+        self.mat_view_ul = glGetUniformLocation(self.shader,"mat_view")
+        self.mat_model_ul = glGetUniformLocation(self.shader,"mat_model")
+        fovy=math.pi/4
+        aspect=self.width/self.height
+        zNear=0.1
+        zFar=10.0
+        mat_proj=glm.perspective(fovy,aspect,zNear,zFar)
+        camPos=glm.vec3(1,1,1)
+        gazePos=glm.vec3(0,0,0)
+        upDir=glm.vec3(0,1,0)
+        mat_view = glm.lookAt(camPos, gazePos, upDir)
+        mat_model = glm.mat4(1.0)
+        glUseProgram(self.shader)
+        glUniformMatrix4fv(mat_proj_ul, 1, GL_FALSE, glm.value_ptr(mat_proj))
+        glUniformMatrix4fv(self.mat_view_ul, 1, GL_FALSE, glm.value_ptr(mat_view))
+        glUniformMatrix4fv(self.mat_model_ul, 1, GL_FALSE, glm.value_ptr(mat_model))
+        glUseProgram(0)
+
         return
     
     def __len__(self):
@@ -193,6 +212,9 @@ class DynamicRenderer(torch.utils.data.Dataset):
 
         # render
         glBindFramebuffer(GL_FRAMEBUFFER, self.pts_fbo)
+        glClearColor(0,0,0.5,1)
+        glViewport(0,0,self.width,self.height)
+        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         glUseProgram(self.shader)
         glBindBuffer(GL_ARRAY_BUFFER, self.pts_vao)
         glDrawArrays(GL_POINTS, 0, self.npts)
