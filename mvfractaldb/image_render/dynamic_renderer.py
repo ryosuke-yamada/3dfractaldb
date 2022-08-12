@@ -295,6 +295,6 @@ if __name__=="__main__":
     ct = time.time()
     print("elapsed time: %.3f s (avg. %.3f s)"%(ct-bt,(ct-bt)/NUM_STEPS))
 
-    pimg=Image.fromarray(np.array(torchvision.utils.make_grid(_imgs,nrow=16).permute(1,2,0)))
+    pimg=Image.fromarray(np.array(torchvision.utils.make_grid(_imgs,nrow=16).permute(1,2,0)).astype(np.uint8))
     pimg.resize((1024,1024))
-    pimg.save("test.png", Image.BILINEAR)
+    pimg.save("test.png")
