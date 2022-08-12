@@ -268,12 +268,18 @@ def worker_init_fn(worker_id:int) -> None:
     return
 
 if __name__=="__main__":
+    base_seed = 7743
+
     use_gpus=[0,1,2,3]
-    data_dir='./'
-    dataset = DynamicRenderer(use_gpus=use_gpus, data_dir=data_dir, base_seed = 7743, transform = None)
+    dataset = DynamicRenderer(use_gpus=use_gpus, data_dir=data_dir, base_seed = base_seed, transform = None)
     dataloader = torch.utils.data.DataLoader(dataset, num_workers=len(use_gpus), batch_size=256, shuffle=True,
                                              drop_last=True, worker_init_fn=worker_init_fn, persistent_workers=True)
 
+
+    random.seed(base_seed)
+    np.random.seed(base_seed)
+    torch.manual_seed(base_seed)
+    torch.cuda.manual_seed(base_seed)
 
     # test loading
     NUM_STEPS = 100
