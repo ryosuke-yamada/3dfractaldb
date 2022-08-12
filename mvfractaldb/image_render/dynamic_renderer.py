@@ -140,15 +140,19 @@ class DynamicRenderer(torch.utils.data.Dataset):
 
         # generate gpu memories
         #self.npts = 10000
+        col_buf=np.ones((self.npts,3,3),np.float32)
         self.pts_vao = glGenVertexArrays(1)
-        self.pts_vbo = glGenBuffers(1)
+        self.pts_pos_vbo = glGenBuffers(1)
+        self.pts_col_vbo = glGenBuffers(1)
         glBindVertexArray(self.pts_vao)
-        glBindBuffer(GL_ARRAY_BUFFER, self.pts_vbo)
+        glBindBuffer(GL_ARRAY_BUFFER, self.pts_pos_vbo)
         glBufferData(GL_ARRAY_BUFFER, sizeof(ctypes.c_float)*3*self.npts, None, GL_DYNAMIC_DRAW)
         glEnableVertexAttribArray(0)
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(0))
+        glBindBuffer(GL_ARRAY_BUFFER, self.pts_col_vbo)
+        glBufferData(GL_ARRAY_BUFFER, sizeof(ctypes.c_float)*3*self.npts, col_buf, GL_DYNAMIC_DRAW)
         glEnableVertexAttribArray(1)
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(sizeof(ctypes.c_float)*3))
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(0))
         glBindVertexArray(0)
 
         self.pts_fbo = glGenFramebuffers(1)
@@ -205,7 +209,7 @@ class DynamicRenderer(torch.utils.data.Dataset):
         cat_id, pts = self.ptss[id]
         pts = pts.astype(np.float32)
         # send pts to gpu
-        glBindBuffer(GL_ARRAY_BUFFER, self.pts_vbo)
+        glBindBuffer(GL_ARRAY_BUFFER, self.pts_pos_vbo)
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(ctypes.c_float)*3*self.npts, pts)
         glBindBuffer(GL_ARRAY_BUFFER, 0)
 
