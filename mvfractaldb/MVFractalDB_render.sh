@@ -1,6 +1,6 @@
 #! /bin/bash
 variance_threshold=0.05
-numof_category=5
+numof_category=1000
 param_path='../dataset/MVFractalDB-'${numof_category}'/3DIFS_params'
 model_save_path='../dataset/MVFractalDB-'${numof_category}'/3Dmodels'
 image_save_path='../dataset/MVFractalDB-'${numof_category}'/images'
