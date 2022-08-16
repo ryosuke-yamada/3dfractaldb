@@ -29,7 +29,6 @@ def centoroid(point):
     sum_y = (sum(point[1]) / args.point_num)
     sum_z = (sum(point[2]) / args.point_num)
     centor_of_gravity = [sum_x, sum_y, sum_z]
-    # centor_of_gravity = centor_of_gravity.reshape([3,1])
     fractal_point_x = (point[0] - centor_of_gravity[0]).tolist()
     fractal_point_y = (point[1] - centor_of_gravity[1]).tolist()
     fractal_point_z = (point[2] - centor_of_gravity[2]).tolist()
@@ -38,25 +37,6 @@ def centoroid(point):
     new_centor.append(fractal_point_z)
     new = np.array(new_centor)
     return new
-
-def generator(args, params):
-    generators = ifs_function()
-    for param in params:
-        generators.set_param(float(param[0]), float(param[1]),
-                             float(param[2]), float(param[3]),
-                             float(param[4]), float(param[5]),
-                             float(param[6]), float(param[7]),
-                             float(param[8]), float(param[9]),
-                             float(param[10]), float(param[11]),
-                             float(param[12]),weight_a=float(weight[0]),
-                             weight_b=float(weight[1]),weight_c=float(weight[2]),
-                             weight_d=float(weight[3]),weight_e=float(weight[4]),
-                             weight_f=float(weight[5]),weight_g=float(weight[6]),
-                             weight_h=float(weight[7]),weight_i=float(weight[8]),
-                             weight_j=float(weight[9]),weight_k=float(weight[10]),
-                             weight_l=float(weight[11]))
-    data = generators.calculate(args.point_num + 1)
-    return data
 
 if __name__ == "__main__":
 	starttime = time.time()
@@ -67,7 +47,7 @@ if __name__ == "__main__":
 
 	csv_names = os.listdir(args.load_root)
 	csv_names.sort()
-	weights = np.genfromtxt("./3dfractal_render/ifs_weight/weights_ins145.csv",dtype=np.str,delimiter=",")
+	weights = np.genfromtxt("./3dfractal_render/ifs_weight/weights_ins145.csv",dtype=str,delimiter=",")
 	for i, csv_name in enumerate(csv_names):
 		name, ext = os.path.splitext(csv_name)
 		
@@ -84,7 +64,7 @@ if __name__ == "__main__":
 		fractal_weight = 0
 		for weight in weights:
 			padded_fractal_weight= '%04d' % fractal_weight
-			params = np.genfromtxt(args.load_root+"/"+csv_name,dtype=np.str,delimiter=",")
+			params = np.genfromtxt(args.load_root+"/"+csv_name,dtype=str,delimiter=",")
 			if args.draw_type == "point_gray":
 				generators = ifs_function()
 				for param in params:
