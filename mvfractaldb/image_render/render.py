@@ -1,8 +1,4 @@
-# depends: PySDL2, PyOpenGL, plyfile, OpenEXR, PIL
-# Moreover, Dynamic Link Libraries of Original SDL2 required.
-# Setting paths also reuired:
-# export PYSDL2_DLL_PATH="/path/to/SDL2/bin"
-# export PATH="/path/to/SDL2/bin:$PATH"
+# depends: pegl, glm, PyOpenGL, plyfile, OpenEXR, PIL, matplotlib
 
 import argparse
 
@@ -17,10 +13,8 @@ import OpenEXR, array, Imath
 from PIL import Image
 import math
 import time
-import sdl2.ext
 from matplotlib import pyplot as plt
 import os
-import cv2
 import glob 
 import random
 from PIL import Image
@@ -29,84 +23,6 @@ def myGLDebugCallback(source, mtype, id, severity, length, message, userParam):
     print("[GLDBG]")
     if mtype == GL_DEBUG_TYPE_ERROR:
         raise SystemError("[GLDBG]")
-
-# class TextDrawer:
-#     tex = None
-#     sfc = None
-#     Width = 512
-#     Height = 512
-#     font = None
-#     printTexShader_prog = None
-#     vao = None
-#     indices_num = 0
-#     colorSampler_ul = None
-#     def __init__(self, renderer):
-#         self.tex = glGenTextures(1)
-#         glBindTexture(GL_TEXTURE_2D, self.tex)
-#         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, None)
-#         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
-#         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-#         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
-#         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
-#         glBindTexture(GL_TEXTURE_2D, 0)
-#         # self.sfc = SDL_CreateRGBSurface(0, self.Width, self.Height, 32, 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff)
-#         self.font = sdl2.ext.FontManager("./image_render/arial.ttf", size=16, color=sdl2.ext.Color(255, 255, 255, 255), bg_color=sdl2.ext.Color(0, 0, 0, 0))
-
-#         points=np.array([
-#             -1,-1,-1,
-#             1,-1,-1,
-#             1,1,-1,
-#             -1,1,-1
-#         ],dtype=np.float32)
-#         UVs=np.array([
-#             0,1,
-#             1,1,
-#             1,0,
-#             0,0
-#         ],dtype=np.float32)
-#         indices=np.array([
-#             0,1,2,
-#             2,3,0
-#         ],dtype=np.uint32)
-#         self.indices_num = indices.size
-#         self.vao = glGenVertexArrays(1)
-#         points_vbo, UVs_vbo, indices_vbo = glGenBuffers(3)
-#         glBindVertexArray(self.vao)
-#         glBindBuffer(GL_ARRAY_BUFFER, points_vbo)
-#         glBufferData(GL_ARRAY_BUFFER, 4*len(points), points, GL_STATIC_DRAW)
-#         glEnableVertexAttribArray(0)
-#         glVertexAttribPointer(0 ,3, GL_FLOAT, GL_FALSE, 4*3, ctypes.c_void_p(0))
-#         glBindBuffer(GL_ARRAY_BUFFER, UVs_vbo)
-#         glBufferData(GL_ARRAY_BUFFER, 4*len(UVs), UVs, GL_STATIC_DRAW)
-#         glEnableVertexAttribArray(1)
-#         glVertexAttribPointer(1 ,2, GL_FLOAT, GL_FALSE, 4*2, ctypes.c_void_p(0))
-#         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_vbo)
-#         glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4*len(indices), indices, GL_STATIC_DRAW)
-#         glBindVertexArray(0)
-
-#         self.printTexShader_prog = createShader("./image_render/printTexShader.vert","./image_render/printTexShader.frag")
-#         self.colorSampler_ul = glGetUniformLocation(self.printTexShader_prog, "colorSampler")
-#         glUseProgram(self.printTexShader_prog)
-#         glUniform1i(self.colorSampler_ul, 0)
-#         glUseProgram(0)
-#     def draw(self, text, position, size=None, color=None):
-#         # SDL_FillRects(self.sfc,SDL_Rect(0,0,self.Width,self.Height),1,sdl2.ext.Color(0,0,0,0))
-#         text_surface = self.font.render(text, size=size, color=color)
-#         # rect = SDL_Rect()
-#         # SDL_GetClipRect(text_surface, rect)
-#         # SDL_BlitScaled(text_surface, None, self.sfc, SDL_Rect(rect.x+position[0], rect.y+position[1], rect.w, rect.h))
-#         # SDL_FreeSurface(text_surface)
-#         glUseProgram(self.printTexShader_prog)
-#         glActiveTexture(GL_TEXTURE0)
-#         glDisable(GL_DEPTH_TEST)
-#         glBindTexture(GL_TEXTURE_2D, self.tex)
-#         glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, self.Width, self.Height, GL_RGBA, GL_UNSIGNED_BYTE, ctypes.cast(self.sfc.contents.pixels,ctypes.POINTER(ctypes.c_ubyte)))
-#         glBindVertexArray(self.vao)
-#         glDrawElements(GL_TRIANGLES, self.indices_num, GL_UNSIGNED_INT, None)
-#         glBindVertexArray(0)
-#         glBindTexture(GL_TEXTURE_2D, 0)
-#         glEnable(GL_DEPTH_TEST)
-#         glUseProgram(0)
 
 def createShader(vertFile, fragFile):
     with open(vertFile,'r',encoding='utf8') as fp:
@@ -160,22 +76,6 @@ Height = 512
 zNear=0.1
 zFar=100.0
 
-
-# SDL_Init(SDL_INIT_VIDEO)
-# SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4)
-# SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1)
-# SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE)
-# SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG)
-
-# window = SDL_CreateWindow(b"render_opengl",
-#                               SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-#                               Width, Height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL)
-# window = SDL_CreateWindow(b"Hello World",
-#                               SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-#                               Width, Height, SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL)
-
-# context = SDL_GL_CreateContext(window)
-
 #print(pegl.egl_version)
 
 dpy = pegl.Display()
@@ -193,7 +93,7 @@ conf = dpy.choose_config({
     pegl.ConfigAttrib.RENDERABLE_TYPE: pegl.ClientAPIFlag.OPENGL_ES,
     pegl.ConfigAttrib.CONTEXT_OPENGL_DEBUG: pegl.EGL_TRUE,
     })[0]
-pegl.bind_api(pegl.ClientAPI.OPENGL_ES)
+pegl.bind_api(pegl.ClientAPI.OPENGL_API)
 ctx = conf.create_context()
 surf = conf.create_pbuffer_surface({pegl.SurfaceAttrib.WIDTH: 640,
                                     pegl.SurfaceAttrib.HEIGHT: 480})
