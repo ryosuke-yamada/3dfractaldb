@@ -16,6 +16,10 @@ International Conference on Computer Vision and Pattern Recognition (CVPR) 2022 
 [[Project](https://ryosuke-yamada.github.io/PointCloud-FractalDataBase/)] 
 [[PDF](https://openaccess.thecvf.com/content/CVPR2022/papers/Yamada_Point_Cloud_Pre-Training_With_Natural_3D_Structures_CVPR_2022_paper.pdf)]<br>
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/point-cloud-pre-training-with-natural-3d/3d-object-detection-on-sun-rgbd-val)](https://paperswithcode.com/sota/3d-object-detection-on-sun-rgbd-val?p=point-cloud-pre-training-with-natural-3d)
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/point-cloud-pre-training-with-natural-3d/3d-object-detection-on-scannetv2)](https://paperswithcode.com/sota/3d-object-detection-on-scannetv2?p=point-cloud-pre-training-with-natural-3d)
+
 <!-- Run the python script ```render.sh```, you can get 3D fractal models and multi-view fractal images. -->
 
 <!-- ## Prerequisites
