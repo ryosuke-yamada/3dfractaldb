@@ -20,6 +20,12 @@ International Conference on Computer Vision and Pattern Recognition (CVPR) 2022 
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/point-cloud-pre-training-with-natural-3d/3d-object-detection-on-scannetv2)](https://paperswithcode.com/sota/3d-object-detection-on-scannetv2?p=point-cloud-pre-training-with-natural-3d)
 
+Ryosuke Yamada, Kensho Hara, Hirokatsu Kataoka, Koshi Makihara, Nakamasa Inoue, Rio Yokota, and Yutaka Satoh, <br>
+"Formula-Supervised Visual-Geometric Pre-training" <br>
+European Conference on Computer Vision (ECCV) 2024 <br>
+[[Project](https://ryosuke-yamada.github.io/fdsl-fsvgp/)] 
+[[PDF]()]<br>
+
 <!-- Run the python script ```render.sh```, you can get 3D fractal models and multi-view fractal images. -->
 
 <!-- ## Prerequisites
