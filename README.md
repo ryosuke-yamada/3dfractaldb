@@ -14,8 +14,8 @@ Ryosuke Yamada, Hirokatsu Kataoka, Naoya Chiba, Yukiyasu Domae and Tetsuya Ogata
 "Point Cloud Pre-training with Natural 3D Structure"<br>
 International Conference on Computer Vision and Pattern Recognition (CVPR) 2022 <br>
 [[Project](https://ryosuke-yamada.github.io/PointCloud-FractalDataBase/)] 
-[[PDF](https://openaccess.thecvf.com/content/CVPR2022/papers/Yamada_Point_Cloud_Pre-Training_With_Natural_3D_Structures_CVPR_2022_paper.pdf)]<br>
-[[Pre-trained Model](https://github.com/ryosuke-yamada/3dfractaldb/blob/main/models/pcfractaldb_votenet_weight.tar)]
+[[PDF](https://openaccess.thecvf.com/content/CVPR2022/papers/Yamada_Point_Cloud_Pre-Training_With_Natural_3D_Structures_CVPR_2022_paper.pdf)]
+[[Pre-trained Model(VoteNet)](https://github.com/ryosuke-yamada/3dfractaldb/blob/main/models/pcfractaldb_votenet_weight.tar)]<br>
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/point-cloud-pre-training-with-natural-3d/3d-object-detection-on-sun-rgbd-val)](https://paperswithcode.com/sota/3d-object-detection-on-sun-rgbd-val?p=point-cloud-pre-training-with-natural-3d)
 
